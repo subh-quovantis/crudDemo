@@ -20,7 +20,7 @@ public class BooksService {
     public Books saveOrUpdate(BookRequestDTO books) {
         Books book1 = new Books();
         book1.setBookId(books.getBookId());
-        book1.setBookName(books.getBookName());
+        book1.setBook_name(books.getBookName());
         book1.setAuthor(books.getAuthor());
         book1.setPrice(books.getPrice());
         return booksRepository.save(book1);
@@ -36,5 +36,11 @@ public class BooksService {
     public void deleteBook(int bookid) {
         Books book=this.getBooksById(bookid);
         booksRepository.delete(book);
+    }
+
+    public List<Books> getBooksByName(String book_name) {
+        List<Books> response = booksRepository.getBooksByName(book_name);
+        response.forEach(e-> System.out.println(e.toString()));
+        return response;
     }
 }

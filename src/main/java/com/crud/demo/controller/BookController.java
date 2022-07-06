@@ -17,13 +17,19 @@ public class BookController {
     BooksService booksService;
 
     @GetMapping("/book/{bookid}")
-    private Books getBooks(@PathVariable("bookid") int bookid){
-        return booksService.getBooksById(bookid);
+    private ResponseEntity<Books> getBooks(@PathVariable("bookid") int bookid){
+        try{
+            Books response=     booksService.getBooksById(bookid);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+        catch (Exception e ){
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     @PostMapping("/book")
     private ResponseEntity<Books> saveBooks(@Valid @RequestBody BookRequestDTO books){
         Books response = booksService.saveOrUpdate(books);
-//        return books.getBookName();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -31,6 +37,14 @@ public class BookController {
     private List<Books> getAllBooks()
     {
         return booksService.getAllBooks();
+    }
+    @GetMapping("/bookByName/{book_name}")
+    private List<Books> getBooksByName(@PathVariable("book_name") String book_name)
+    {
+//        List<Books> response =  booksService.getBooksByName(book_name);
+//        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        System.out.println(book_name);
+        return booksService.getBooksByName(book_name);
     }
     @DeleteMapping("/book/{bookid}")
     private void deleteBook(@PathVariable("bookid") int bookid)

@@ -1,16 +1,23 @@
 package com.crud.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Table
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Books {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookId;
     @Column
-    private String bookName;
+    private String book_name;
     @Column
     private String author;
     @Column
@@ -24,13 +31,7 @@ public class Books {
         this.bookId = bookId;
     }
 
-    public String getBookName() {
-        return bookName;
-    }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
 
     public String getAuthor() {
         return author;
