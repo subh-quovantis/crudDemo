@@ -17,9 +17,9 @@ public class BooksService {
          return booksRepository.findById(bookId).get();
     }
 
-    public Books saveOrUpdate(BookRequestDTO books) {
+    public Books saveBooks(BookRequestDTO books) {
         Books book1 = new Books();
-        book1.setBookId(books.getBookId());
+        book1.setBook_id(books.getBookId());
         book1.setBook_name(books.getBookName());
         book1.setAuthor(books.getAuthor());
         book1.setPrice(books.getPrice());
@@ -42,5 +42,19 @@ public class BooksService {
         List<Books> response = booksRepository.getBooksByName(book_name);
         response.forEach(e-> System.out.println(e.toString()));
         return response;
+    }
+    public Books updateBooks(Books books) {
+        Books book1 = new Books();
+        Books book =  booksRepository.getBooksById(books.getBook_id());
+
+        if(book.getBook_name()!=null){
+            book.setBook_id(books.getBook_id());
+            book.setBook_name(books.getBook_name());
+            book.setAuthor(books.getAuthor());
+            book.setPrice(books.getPrice());
+            return booksRepository.save(book);
+        }
+        else
+        return null;
     }
 }

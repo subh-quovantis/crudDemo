@@ -29,7 +29,7 @@ public class BookController {
     }
     @PostMapping("/book")
     private ResponseEntity<Books> saveBooks(@Valid @RequestBody BookRequestDTO books){
-        Books response = booksService.saveOrUpdate(books);
+        Books response = booksService.saveBooks(books);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -50,5 +50,10 @@ public class BookController {
     private void deleteBook(@PathVariable("bookid") int bookid)
     {
         booksService.deleteBook(bookid);
+    }
+    @PutMapping("/book")
+    private ResponseEntity<Books> updateBooks( @RequestBody Books books){
+        Books response = booksService.updateBooks(books);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

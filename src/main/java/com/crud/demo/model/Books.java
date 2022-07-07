@@ -15,7 +15,7 @@ public class Books {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int bookId;
+    private int book_id;
     @Column
     private String book_name;
     @Column
@@ -23,13 +23,7 @@ public class Books {
     @Column
     private int price;
 
-    public int getBookId() {
-        return bookId;
-    }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
 
 
 
